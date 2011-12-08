@@ -1,7 +1,7 @@
 iplant-email
 ============
 
-Provides backend services with a relatively simple way to send emails.
+Provides a backend service for a relatively simple way to send emails to users.
 
 
 Usage
