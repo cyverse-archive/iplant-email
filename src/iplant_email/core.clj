@@ -2,8 +2,8 @@
   (:use compojure.core)
   (:use [compojure.route :as route]
         [compojure.handler :as handler]
-        [clojure.contrib.json :as json]
-        [clojure.contrib.logging :as log]
+        [clojure.data.json :as json]
+        [clojure.tools.logging :as log]
         [clojure-commons.props :as props]
         [iplant-email.send-mail :as sm]
         [iplant-email.json-body :as jb]
