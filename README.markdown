@@ -1,21 +1,25 @@
-# iplant-email
+iplant-email
+============
 
 Provides backend services with a relatively simple way to send emails.
 
 
-## Usage
+Usage
+-----
 
 iplant-email is packaged as a WAR and should be deployed in a servlet container (i.e. Tomcat).
 
 
-### Configuration
+Configuration
+-------------
 
 By default, iplant-email will use a unauthenticated, unencrypted local SMTP server that runs on port 25. If you need to change any of these settings, the configuration file lives inside the WAR file at WEB-INF/classes/iplant-email.properties. 
 
 Additionally, the configuration file allows you to set the "from" address for the emails that are sent from this service.
 
 
-### Making a request
+Making a request
+----------------
 
 There is only one endpoint in the iplant-email app, "/". To request that an email be sent, you need to know the template name, the 'to' email address, and the values that are to be interpolated into the email template.
 
@@ -30,7 +34,8 @@ The 'template' field corresponds to an email template located in the WEB-INF/cla
 The values field is a map that contains values that are interpolated into corresponding fields in the email template. For instance, "Foo" is substituted into the email wherever $user$ appears.
 
 
-### Adding/Modifying Email Templates
+Adding/Modifying Email Templates
+--------------------------------
 
 Email templates live in the WEB-INF/classes/ directory of the deployed WAR file. 
 
