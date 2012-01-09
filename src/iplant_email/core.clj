@@ -5,14 +5,26 @@
         [clojure.data.json :as json]
         [clojure.tools.logging :as log]
         [clojure-commons.props :as props]
+        [clojure-commons.clavin-client :as cl]
         [iplant-email.send-mail :as sm]
         [iplant-email.json-body :as jb]
         [iplant-email.json-validator :as jv]
         [iplant-email.templatize :as tmpl]))
 
-(def config (props/parse-properties "iplant-email.properties"))
-(def smtp-host (get config "iplant-email.smtp.host"))
-(def smtp-from-addr (get config "iplant-email.smtp.from-address"))
+(def zkprops (props/parse-properties "iplant-email.properties"))
+(def zkurl (get zkprops "zookeeper"))
+(def config (atom nil))
+
+(cl/with-zk
+  zkurl
+  (when (not (cl/can-run?))
+    (log/warn "THIS APPLICATION CANNOT RUN ON THIS MACHINE. SO SAYETH ZOOKEEPER.")
+    (log/warn "THIS APPLICATION WILL NOT EXECUTE CORRECTLY."))
+  
+  (reset! config (cl/properties "iplant-email")))
+
+(def smtp-host (get @config "iplant-email.smtp.host"))
+(def smtp-from-addr (get @config "iplant-email.smtp.from-address"))
 
 (defn format-exception
   "Formats a raised exception as a JSON object. Returns a response map."
