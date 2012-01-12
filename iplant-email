@@ -14,7 +14,7 @@ program=iplant-email
 jarfile=iplant-email-1.0.0-SNAPSHOT-standalone.jar
 jar=/usr/local/lib/${program}/${jarfile}
 conf=/etc/${program}
-mainclass=${program}.core
+mainclass=iplant_email.core
 
 ################################################################################
 
