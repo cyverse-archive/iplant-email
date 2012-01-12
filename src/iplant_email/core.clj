@@ -1,4 +1,5 @@
 (ns iplant-email.core
+  (:gen-class)
   (:use compojure.core)
   (:use [compojure.route :as route]
         [compojure.handler :as handler]
