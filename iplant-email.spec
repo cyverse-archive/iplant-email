@@ -44,6 +44,20 @@ install iplant-email-1.0.0-SNAPSHOT-standalone.jar $RPM_BUILD_ROOT/usr/local/lib
 install conf/log4j.properties $RPM_BUILD_ROOT/etc/iplant-email/
 install conf/iplant-email.properties $RPM_BUILD_ROOT/etc/iplant-email/
 
+%post
+/sbin/chkconfig --add iplant-email
+
+%preun
+if [ $1 -eq 0 ] ; then
+	/sbin/service iplant-email stop >/dev/null 2>&1
+	/sbin/chkconfig --del iplant-email
+fi
+
+%postun
+if [ "$1" -ge "1" ] ; then
+	/sbin/service iplant-email condrestart >/dev/null 2>&1 || :
+fi
+
 %clean
 lein clean
 rm -r lib/*
