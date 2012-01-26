@@ -1,6 +1,6 @@
 (ns iplant-email.json-validator
-  (:require [clojure.contrib.json :as json]
-            [clojure.contrib.string :as string]))
+  (:require [clojure.data.json :as json]
+            [clojure.string :as string]))
 
 (defn json?
   "Returns true if a string is JSON."

@@ -3,13 +3,6 @@ iplant-email
 
 Provides a backend service for a relatively simple way to send emails to users.
 
-
-Deployment
-----------
-
-iplant-email is packaged as a WAR and should be deployed in a servlet container (i.e. Tomcat).
-
-
 Configuration
 -------------
 
