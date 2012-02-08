@@ -13,6 +13,7 @@ Group: Applications
 BuildRoot: %{_tmppath}/%{name}-%{version}-buildroot
 License: BSD
 Provides: iplant-email
+Requires: iplant-service-config
 Source0: %{name}-%{version}.tar.gz
 
 %description

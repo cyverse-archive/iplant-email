@@ -65,7 +65,7 @@
 
 (defn -main
   [& args]
-  (def zkprops (props/parse-properties "iplant-email.properties"))
+  (def zkprops (props/parse-properties "zkhosts.properties"))
   (def zkurl (get zkprops "zookeeper"))
   
   (cl/with-zk
