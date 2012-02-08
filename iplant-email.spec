@@ -33,6 +33,9 @@ unset JAVA_OPTS
 lein deps
 lein uberjar
 
+%clean
+rm -r $RPM_BUILD_ROOT
+
 %install
 install -d $RPM_BUILD_ROOT/usr/local/lib/iplant-email/
 install -d $RPM_BUILD_ROOT/var/run/iplant-email/
@@ -43,7 +46,6 @@ install -d $RPM_BUILD_ROOT/etc/iplant-email/
 install iplant-email $RPM_BUILD_ROOT/etc/init.d/
 install iplant-email-1.0.0-SNAPSHOT-standalone.jar $RPM_BUILD_ROOT/usr/local/lib/iplant-email/
 install conf/log4j.properties $RPM_BUILD_ROOT/etc/iplant-email/
-install conf/iplant-email.properties $RPM_BUILD_ROOT/etc/iplant-email/
 install conf/*.st $RPM_BUILD_ROOT/etc/iplant-email/
 
 %post
