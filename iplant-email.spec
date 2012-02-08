@@ -33,9 +33,6 @@ unset JAVA_OPTS
 lein deps
 lein uberjar
 
-%clean
-rm -r $RPM_BUILD_ROOT
-
 %install
 install -d $RPM_BUILD_ROOT/usr/local/lib/iplant-email/
 install -d $RPM_BUILD_ROOT/var/run/iplant-email/
@@ -65,6 +62,7 @@ fi
 %clean
 lein clean
 rm -r lib/*
+rm -r $RPM_BUILD_ROOT
 
 %files
 %attr(-,iplant,iplant) /usr/local/lib/iplant-email/
