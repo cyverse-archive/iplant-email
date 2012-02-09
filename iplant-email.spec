@@ -72,7 +72,6 @@ rm -r $RPM_BUILD_ROOT
 %attr(-,iplant,iplant) /etc/iplant-email/
 
 %config %attr(0644,iplant,iplant) /etc/iplant-email/log4j.properties
-%config %attr(0644,iplant,iplant) /etc/iplant-email/iplant-email.properties
 
 %attr(0755,root,root) /etc/init.d/iplant-email
 %attr(0644,iplant,iplant) /usr/local/lib/iplant-email/iplant-email-1.0.0-SNAPSHOT-standalone.jar
