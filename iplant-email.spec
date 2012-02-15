@@ -6,13 +6,14 @@
 Summary: iplant-email
 Name: iplant-email
 Version: 0.1.0
-Release: 1
+Release: 2
 Epoch: 0
 BuildArchitectures: noarch
 Group: Applications
 BuildRoot: %{_tmppath}/%{name}-%{version}-buildroot
 License: BSD
 Provides: iplant-email
+Requires: iplant-service-config
 Source0: %{name}-%{version}.tar.gz
 
 %description
@@ -42,7 +43,7 @@ install -d $RPM_BUILD_ROOT/etc/iplant-email/
 install iplant-email $RPM_BUILD_ROOT/etc/init.d/
 install iplant-email-1.0.0-SNAPSHOT-standalone.jar $RPM_BUILD_ROOT/usr/local/lib/iplant-email/
 install conf/log4j.properties $RPM_BUILD_ROOT/etc/iplant-email/
-install conf/iplant-email.properties $RPM_BUILD_ROOT/etc/iplant-email/
+install conf/*.st $RPM_BUILD_ROOT/etc/iplant-email/
 
 %post
 /sbin/chkconfig --add iplant-email
@@ -61,6 +62,7 @@ fi
 %clean
 lein clean
 rm -r lib/*
+rm -r $RPM_BUILD_ROOT
 
 %files
 %attr(-,iplant,iplant) /usr/local/lib/iplant-email/
@@ -70,7 +72,6 @@ rm -r lib/*
 %attr(-,iplant,iplant) /etc/iplant-email/
 
 %config %attr(0644,iplant,iplant) /etc/iplant-email/log4j.properties
-%config %attr(0644,iplant,iplant) /etc/iplant-email/iplant-email.properties
 
 %attr(0755,root,root) /etc/init.d/iplant-email
 %attr(0644,iplant,iplant) /usr/local/lib/iplant-email/iplant-email-1.0.0-SNAPSHOT-standalone.jar

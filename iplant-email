@@ -13,7 +13,7 @@ RUNUSER=iplant
 program=iplant-email
 jarfile=iplant-email-1.0.0-SNAPSHOT-standalone.jar
 jar=/usr/local/lib/${program}/${jarfile}
-conf=/etc/${program}
+conf=/etc/iplant-services/:/etc/${program}/
 mainclass=iplant_email.core
 
 ################################################################################
