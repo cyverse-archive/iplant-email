@@ -66,8 +66,8 @@ The 'to' field is hopefully pretty self-explanatory, as is the 'subject'
 field.
 
 The 'template' field corresponds to an email template located in the
-`/etc/iplant-email directory. It is the filename of the template, minus the
-'.st' extension.
+`/etc/iplant-email` directory. It is the filename of the template, minus the
+`.st` extension.
 
 The values field is a map that contains values that are interpolated into
 corresponding fields in the email template. For instance, "Foo" is substituted
