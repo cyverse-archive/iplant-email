@@ -60,6 +60,7 @@ curl -H "Content-Type:application/json" -d '
     }
 }
 ' http://127.0.0.1:3000/
+```
 
 The 'to' field is hopefully pretty self-explanatory, as is the 'subject'
 field.
