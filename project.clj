@@ -1,5 +1,5 @@
 (defproject iplant-email "1.0.0-SNAPSHOT"
-  :description "FIXME: write description"
+  :description "iPlant Email Service"
   :dependencies [[org.clojure/clojure "1.3.0"]
                  [org.iplantc/clojure-commons "1.1.0-SNAPSHOT"]
                  [org.clojure/data.json "0.1.1"]
@@ -9,5 +9,12 @@
                  [compojure "1.0.1"]
                  [ring/ring-jetty-adapter "1.0.1"]
                  [log4j/log4j "1.2.16"]]
+  :dev-dependencies [[org.iplantc/lein-iplant-rpm "1.1.1-SNAPSHOT"]]
+  :iplant-rpm {:summary "iplant-email"
+               :release 1
+               :dependencies ["iplant-service-config >= 0.1.0-4"]
+               :config-files ["log4j.properties"]
+               :config-path "conf"
+               :resources ["*.st"]}
   :aot [iplant-email.core]
   :main iplant-email.core)
