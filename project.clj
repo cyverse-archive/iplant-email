@@ -11,7 +11,7 @@
                  [log4j/log4j "1.2.16"]]
   :dev-dependencies [[org.iplantc/lein-iplant-rpm "1.1.1-SNAPSHOT"]]
   :iplant-rpm {:summary "iplant-email"
-               :release 1
+               :release 2
                :dependencies ["iplant-service-config >= 0.1.0-5"]
                :config-files ["log4j.properties"]
                :config-path "conf"
