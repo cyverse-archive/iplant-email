@@ -1,4 +1,4 @@
-The status of the analysis $analysisname$ has changed to $analysisstatus$.
+The status of $analysisname$ has changed to $analysisstatus$.
 
 Description:
 $analysisdescription$
