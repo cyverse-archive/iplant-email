@@ -1,7 +1,7 @@
 (defproject iplant-email "1.0.0-SNAPSHOT"
   :description "iPlant Email Service"
   :dependencies [[org.clojure/clojure "1.3.0"]
-                 [org.iplantc/clojure-commons "1.1.0-SNAPSHOT"]
+                 [org.iplantc/clojure-commons "1.2.0-SNAPSHOT"]
                  [org.clojure/data.json "0.1.1"]
                  [org.clojure/tools.logging "0.2.3"]
                  [javax.mail/mail "1.4"]
