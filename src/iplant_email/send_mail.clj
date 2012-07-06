@@ -9,12 +9,14 @@
     props))
 
 (defn send-email
-  [host to-addr from-addr subject body]
+  [{:keys [host to-addr from-addr from-name subject body]}]
   (let [props   (set-props host)
         session (Session/getDefaultInstance props nil)
         msg     (MimeMessage. session)
         from    (InternetAddress. from-addr)
         to      (InternetAddress. to-addr)]
+    (when from-name
+      (.setPersonal from from-name))
     (doto msg
       (.setFrom from)
       (.addRecipient Message$RecipientType/TO to)
