@@ -51,9 +51,16 @@
                   template-values (:values body)
                   to-addr         (:to body)
                   subject         (:subject body)
-                  from-addr       (smtp-from-addr)
-                  email-body      (tmpl/create-email template-name template-values)
-                  send-return     (sm/send-email (smtp-host) to-addr from-addr subject email-body)]
+                  from-addr       (or (:from-addr body) (smtp-from-addr))
+                  from-name       (:from-name body)
+                  email-body      (tmpl/create-email template-name template-values)]
+              (sm/send-email 
+                {:host (smtp-host) 
+                 :to-addr to-addr 
+                 :from-addr from-addr
+                 :from-name from-name 
+                 :subject subject 
+                 :body email-body})
               (log/debug (str "Successfully sent email for request: " (json/json-str body)))
               {:status 200 :body "Email sent."})
             (catch Exception e

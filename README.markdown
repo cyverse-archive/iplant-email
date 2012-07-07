@@ -50,6 +50,8 @@ Here is a sample request:
 curl -H "Content-Type:application/json" -d '
 {
     "to" : "foo@example.com",
+    "from-addr" : "support@example.com",
+    "from-name" : "Example Support",
     "subject" : "Example",
     "template" : "bettertest",
     "values" : {
@@ -63,6 +65,10 @@ curl -H "Content-Type:application/json" -d '
 
 The 'to' field is hopefully pretty self-explanatory, as is the 'subject'
 field.
+
+The from-addr field is optional and contains the email address that should be placed in the from field. If it is omitted from the request, the configuration option from iplant-emails config file will be used instead.
+
+The from-name field is optional and contains the name associated with the email address placed in the from field. If it is omitted, then no name is associated with the from adress.
 
 The 'template' field corresponds to an email template located in the
 `/etc/iplant-email` directory. It is the filename of the template, minus the
