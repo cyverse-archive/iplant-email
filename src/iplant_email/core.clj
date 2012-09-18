@@ -50,13 +50,15 @@
             (let [template-name   (:template body)
                   template-values (:values body)
                   to-addr         (:to body)
+                  cc-addr         (:cc body)
                   subject         (:subject body)
                   from-addr       (or (:from-addr body) (smtp-from-addr))
                   from-name       (:from-name body)
                   email-body      (tmpl/create-email template-name template-values)]
               (sm/send-email 
-                {:host (smtp-host) 
-                 :to-addr to-addr 
+                {:host (smtp-host)
+                 :to-addr to-addr
+                 :cc-addr cc-addr
                  :from-addr from-addr
                  :from-name from-name 
                  :subject subject 
