@@ -9,7 +9,7 @@
                  [compojure "1.0.1"]
                  [ring/ring-jetty-adapter "1.0.1"]
                  [log4j/log4j "1.2.16"]]
-  :plugins [[org.iplantc/lein-iplant-rpm "1.3.0-SNAPSHOT"]]
+  :plugins [[org.iplantc/lein-iplant-rpm "1.3.2-SNAPSHOT"]]
   :iplant-rpm {:summary "iplant-email"
                :dependencies ["iplant-service-config >= 0.1.0-5"]
                :config-files ["log4j.properties"]
