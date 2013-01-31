@@ -1,11 +1,11 @@
 (ns iplant-email.json-validator
-  (:require [clojure.data.json :as json]
+  (:require [cheshire.core :as cheshire]
             [clojure.string :as string]))
 
 (defn json?
   "Returns true if a string is JSON."
   [json-string]
-  (if (try (json/read-json json-string) (catch Exception e false))
+  (if (try (cheshire/decode json-string true) (catch Exception e false))
     true
     false))
 
