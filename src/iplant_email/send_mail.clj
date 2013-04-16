@@ -10,14 +10,17 @@
     props))
 
 (defn msg->log
-  [{:keys [host to-addr from-addr from-name cc-addr subject body]}]
+  [{:keys [host to-addr from-addr from-name cc-addr subject body]} & 
+   {:keys [body?] 
+    :or {body? true}}]
   (str "\n**** EMAIL LOG START\n"
        "TO: " to-addr "\n"
        "FROM ADDRESS: " from-addr "\n"
        "FROM NAME: " from-name "\n"
        "CC: " cc-addr "\n"
        "SUBJECT: " subject "\n"
-       "BODY: \n" body "\n"
+       (when body? 
+         (str "BODY: \n" body "\n"))
        "**** EMAIL LOG END\n"))
 
 (defn send-email
@@ -38,7 +41,7 @@
     (when cc-addr
       (.addRecipient msg Message$RecipientType/CC cc))
     
-    (log/warn (msg->log req))
+    (log/warn (msg->log req :body? false))
     
     (try
       (Transport/send msg)
