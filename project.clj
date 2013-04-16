@@ -15,5 +15,7 @@
                :config-files ["log4j.properties"]
                :config-path "conf"
                :resources ["*.st"]}
+  :repositories  {"iplantCollaborative"
+                  "http://projects.iplantcollaborative.org/archiva/repository/internal/"}
   :aot [iplant-email.core]
   :main iplant-email.core)
