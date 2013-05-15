@@ -1,5 +1,6 @@
 (ns iplant-email.json-body
-  (:require [clojure.data.json :as json]))
+  (:use [clojure.java.io :only [reader]])
+  (:require [cheshire.core :as cheshire]))
 
 (defn- json-body?
   [request]
@@ -20,16 +21,15 @@
     (cond
       (not (valid-method? request))
       (handler request)
-      
+
       (not (contains? request :body))
       (handler request)
-      
+
       (not (json-body? request))
       (handler request)
-      
+
       :else
-      (let [body-string (slurp (:body request))
-            body-map    (json/read-json body-string)
+      (let [body-reader (reader (:body request))
+            body-map    (cheshire/decode-stream body-reader true)
             new-req     (assoc request :body body-map)]
         (handler new-req)))))
-

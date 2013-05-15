@@ -1,9 +1,9 @@
 (ns iplant-email.core
   (:gen-class)
   (:use compojure.core)
-  (:use [compojure.route :as route]
+  (:use [cheshire.core :as cheshire]
+        [compojure.route :as route]
         [compojure.handler :as handler]
-        [clojure.data.json :as json]
         [clojure.tools.logging :as log]
         [clojure-commons.props :as props]
         [clojure-commons.clavin-client :as cl]
@@ -33,18 +33,18 @@
           stack-trace       (. string-writer toString)]
       (log/warn (str localized-message stack-trace))
       {:status 500
-       :body (json/json-str {:message     localized-message
-                             :stack-trace stack-trace})})))
+       :body (cheshire/encode {:message     localized-message
+                               :stack-trace stack-trace})})))
 
 (defroutes email-routes
   (GET "/" [] "Welcome to iPlant Email!")
-  
+
   (POST "/" {body :body}
-        (log/debug (str "Received request with body: " (json/json-str body)))
+        (log/debug (str "Received request with body: " (cheshire/encode body)))
         (cond
           (not (jv/valid? body {:template string?}))
           {:status 500 :body body}
-          
+
           :else
           (try
             (let [template-name   (:template body)
@@ -55,15 +55,15 @@
                   from-addr       (or (:from-addr body) (smtp-from-addr))
                   from-name       (:from-name body)
                   email-body      (tmpl/create-email template-name template-values)]
-              (sm/send-email 
+              (sm/send-email
                 {:host (smtp-host)
                  :to-addr to-addr
                  :cc-addr cc-addr
                  :from-addr from-addr
-                 :from-name from-name 
-                 :subject subject 
+                 :from-name from-name
+                 :subject subject
                  :body email-body})
-              (log/debug (str "Successfully sent email for request: " (json/json-str body)))
+              (log/debug (str "Successfully sent email for request: " (cheshire/encode body)))
               {:status 200 :body "Email sent."})
             (catch Exception e
               (format-exception e))))))
@@ -76,13 +76,13 @@
   [& args]
   (def zkprops (props/parse-properties "zkhosts.properties"))
   (def zkurl (get zkprops "zookeeper"))
-  
+
   (cl/with-zk
     zkurl
     (when (not (cl/can-run?))
       (log/warn "THIS APPLICATION CANNOT RUN ON THIS MACHINE. SO SAYETH ZOOKEEPER.")
       (log/warn "THIS APPLICATION WILL NOT EXECUTE CORRECTLY."))
-  
+
     (reset! config (cl/properties "iplant-email")))
-  
+
   (jetty/run-jetty (site-handler email-routes) {:port (listen-port)}))
